@@ -90,3 +90,29 @@ console.log(calculateTotalCost("10", 3, 0.08)); // Output: "Invalid input." (pri
 console.log(calculateTotalCost(10, -3, 0.08)); // Output: "Invalid input." (negative quantity)
 console.log(calculateTotalCost(10, 3, "0.08")); // Output: "Invalid input." (taxRate is string)
 console.log(calculateTotalCost(NaN, 3, 0.08)); // Output: "Invalid input." (price is NaN)
+
+/****************************************************************************************    */
+// TASK 3: Functions with Conditional Logic
+
+/**
+ * Checks eligibility for a program based on age and employment status
+ */
+function checkEligibility(age, isEmployed) {
+  // Check eligibility rules with conditional logic
+  if (age > 18 && isEmployed) {
+    return "You are eligible for the program.";
+  } else if (age > 18 && !isEmployed) {
+    return "You are conditionally eligible for the program.";
+  } else {
+    return "You are not eligible for the program.";
+  }
+}
+
+// Example usage for Task 3:
+console.log("Task 3 - Check Eligibility:");
+console.log(checkEligibility(25, true)); // Output: "You are eligible for the program."
+console.log(checkEligibility(22, false)); // Output: "You are conditionally eligible for the program."
+console.log(checkEligibility(17, true)); // Output: "You are not eligible for the program."
+console.log(checkEligibility(18, false)); // Output: "You are not eligible for the program."
+console.log(checkEligibility(19, true)); // Output: "You are eligible for the program."
+console.log(checkEligibility(30, false)); // Output: "You are conditionally eligible for the program."
