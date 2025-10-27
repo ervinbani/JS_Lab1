@@ -5,3 +5,5 @@
 ### 1. Formats a full name in the format "lastName, firstName"
 
 ### 2: Format names with proper capitalization
+
+### 3: Create function for full name validation
