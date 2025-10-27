@@ -49,31 +49,36 @@ calculateTotalCost(10, -3, 0.08); // Returns: "Invalid input."
 **Purpose**: Determines program eligibility based on age and employment status using conditional logic.
 
 **Parameters**:
+
 - `age` (number): The person's age
 - `isEmployed` (boolean): Whether the person is employed (true) or unemployed (false)
 
 **Eligibility Rules**:
+
 1. **Over 18 AND employed**: Eligible for the program
-2. **Over 18 BUT unemployed**: Conditionally eligible for the program  
+2. **Over 18 BUT unemployed**: Conditionally eligible for the program
 3. **18 or younger**: Not eligible for the program (regardless of employment status)
 
 **Returns**:
+
 - `string`: "You are eligible for the program." (age > 18 and employed)
 - `string`: "You are conditionally eligible for the program." (age > 18 but unemployed)
 - `string`: "You are not eligible for the program." (age ≤ 18)
 - `string`: "Invalid input." (invalid parameters)
 
 **Features**:
+
 - Input validation for age (must be a valid non-negative number)
 - Input validation for employment status (must be boolean)
 - Clear conditional logic implementation
 - Appropriate string messages for each scenario
 
 **Example Usage**:
+
 ```javascript
-checkEligibility(25, true);   // Returns: "You are eligible for the program."
-checkEligibility(22, false);  // Returns: "You are conditionally eligible for the program."
-checkEligibility(17, true);   // Returns: "You are not eligible for the program."
-checkEligibility(18, false);  // Returns: "You are not eligible for the program."
+checkEligibility(25, true); // Returns: "You are eligible for the program."
+checkEligibility(22, false); // Returns: "You are conditionally eligible for the program."
+checkEligibility(17, true); // Returns: "You are not eligible for the program."
+checkEligibility(18, false); // Returns: "You are not eligible for the program."
 checkEligibility("25", true); // Returns: "Invalid input."
 ```
