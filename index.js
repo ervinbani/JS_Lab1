@@ -46,3 +46,7 @@ function checkFullNameWithValidation(firstName, lastName) {
     return "Invalid name input.";
   }
 }
+
+// Example usage for Task 1.3:
+console.log(checkFullNameWithValidation("John", "")); // Returns "Invalid name input."
+console.log(checkFullNameWithValidation("", "Doe")); // Returns "Invalid name input."
