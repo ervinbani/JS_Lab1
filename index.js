@@ -5,7 +5,8 @@
  * Formats a full name in the format "lastName, firstName"
  */
 function formatFullName(firstName, lastName) {
-  return lastName + ", " + firstName;
+  const fullName = lastName + ", " + firstName;
+  return fullName;
 }
 
 // Example usage:
