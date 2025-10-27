@@ -116,3 +116,111 @@ console.log(checkEligibility(17, true)); // Output: "You are not eligible for th
 console.log(checkEligibility(18, false)); // Output: "You are not eligible for the program."
 console.log(checkEligibility(19, true)); // Output: "You are eligible for the program."
 console.log(checkEligibility(30, false)); // Output: "You are conditionally eligible for the program."
+
+/****************************************************************************************    */
+// TASK 4: Refactoring for Reusability
+
+/**
+ * Calculates the total cost including tax with optional discount
+ */
+function calculateTotalCostWithDiscount(
+  price,
+  quantity,
+  taxRate,
+  discount = null
+) {
+  // Validate required parameters
+  if (
+    typeof price !== "number" ||
+    typeof quantity !== "number" ||
+    typeof taxRate !== "number" ||
+    isNaN(price) ||
+    isNaN(quantity) ||
+    isNaN(taxRate) ||
+    price < 0 ||
+    quantity < 0 ||
+    taxRate < 0
+  ) {
+    return "Invalid input.";
+  }
+
+  // Calculate subtotal
+  const subtotal = price * quantity;
+  let discountedSubtotal = subtotal;
+
+  // Apply discount if provided
+  if (discount !== null) {
+    if (typeof discount === "number") {
+      // Assume it's a dollar amount discount
+      if (discount < 0) {
+        return "Invalid input.";
+      }
+      discountedSubtotal = subtotal - discount;
+    } else if (
+      typeof discount === "object" &&
+      discount.type &&
+      discount.value !== undefined
+    ) {
+      // Handle structured discount object
+      if (typeof discount.value !== "number" || discount.value < 0) {
+        return "Invalid input.";
+      }
+
+      if (discount.type === "percentage" || discount.type === "%") {
+        // Percentage discount (e.g., {type: "percentage", value: 10} for 10%)
+        const discountAmount = subtotal * (discount.value / 100);
+        discountedSubtotal = subtotal - discountAmount;
+      } else if (discount.type === "dollar" || discount.type === "$") {
+        // Dollar amount discount (e.g., {type: "dollar", value: 5} for $5)
+        discountedSubtotal = subtotal - discount.value;
+      } else {
+        return "Invalid input.";
+      }
+    } else {
+      return "Invalid input.";
+    }
+  }
+
+  // Ensure discounted subtotal doesn't go negative
+  if (discountedSubtotal < 0) {
+    discountedSubtotal = 0;
+  }
+
+  // Calculate total cost with tax: discountedSubtotal * (1 + taxRate)
+  const totalCost = discountedSubtotal * (1 + taxRate);
+
+  return totalCost;
+}
+
+// Example usage for Task 4:
+console.log("Task 4 - Calculate Total Cost with Discount:");
+
+// No discount (same as original function)
+console.log(calculateTotalCostWithDiscount(100, 2, 0.08)); // Output: 216 (subtotal: $200, tax: $16)
+
+// Dollar amount discount
+console.log(calculateTotalCostWithDiscount(100, 2, 0.08, 20)); // Output: 194.4 (subtotal: $200, discount: $20, discounted: $180, tax: $14.4)
+
+// Percentage discount using object notation
+console.log(
+  calculateTotalCostWithDiscount(100, 2, 0.08, {
+    type: "percentage",
+    value: 10,
+  })
+); // Output: 194.4 (subtotal: $200, 10% discount: $20, discounted: $180, tax: $14.4)
+
+// Dollar discount using object notation
+console.log(
+  calculateTotalCostWithDiscount(100, 2, 0.08, { type: "dollar", value: 25 })
+); // Output: 189 (subtotal: $200, discount: $25, discounted: $175, tax: $14)
+
+// Percentage discount with % symbol
+console.log(
+  calculateTotalCostWithDiscount(50, 3, 0.075, { type: "%", value: 15 })
+); // Output: 137.8125 (subtotal: $150, 15% discount: $22.5, discounted: $127.5, tax: $9.5625)
+
+// Test invalid inputs
+console.log(calculateTotalCostWithDiscount(100, 2, 0.08, -10)); // Output: "Invalid input." (negative discount)
+console.log(
+  calculateTotalCostWithDiscount(100, 2, 0.08, { type: "invalid", value: 10 })
+); // Output: "Invalid input." (invalid discount type)

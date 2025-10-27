@@ -82,3 +82,61 @@ checkEligibility(17, true); // Returns: "You are not eligible for the program."
 checkEligibility(18, false); // Returns: "You are not eligible for the program."
 checkEligibility("25", true); // Returns: "Invalid input."
 ```
+
+## Task 4: Refactoring for Reusability
+
+### Function: `calculateTotalCostWithDiscount(price, quantity, taxRate, discount)`
+
+**Purpose**: Enhanced version of the cost calculation function with optional discount support. Demonstrates refactoring for improved reusability and functionality.
+
+**Parameters**:
+
+- `price` (number): The base price of the item
+- `quantity` (number): The quantity of items to purchase
+- `taxRate` (number): The tax rate as a decimal (e.g., 0.08 for 8% tax)
+- `discount` (number|object, optional): The discount to apply
+
+**Discount Formats**:
+
+1. **Simple Number**: Treated as dollar amount (e.g., `20` = $20 off)
+2. **Percentage Object**: `{type: "percentage", value: 10}` = 10% off
+3. **Dollar Object**: `{type: "dollar", value: 25}` = $25 off
+4. **Alternative Notation**: `{type: "%", value: 15}` = 15% off
+
+**Calculation Process**:
+
+1. Calculate subtotal: `price × quantity`
+2. Apply discount (if provided):
+   - **Dollar amount**: `subtotal - discount`
+   - **Percentage**: `subtotal - (subtotal × discount/100)`
+3. Apply tax: `discountedSubtotal × (1 + taxRate)`
+
+**Returns**:
+
+- `number`: The total cost including tax and discount when all inputs are valid
+- `string`: "Invalid input." when any parameter is invalid
+
+/**\*\***\*\*\*\***\*\***\*\*\*\***\*\***\*\*\*\***\*\***\***\*\***\*\*\*\***\*\***\*\*\*\***\*\***\*\*\*\***\*\***/
+
+# REFLECTIONS
+
+## Building Flexible Functions with Parameters
+
+When developing these functions, my goal was to make them reusable and easy to maintain.
+Each function, such as formatFullName(firstName, lastName) and calculateTotalCost(price, quantity, taxRate), was designed to work with any valid input.
+I separated validation logic into a dedicated function (checkFullNameWithValidation) to keep the code clean and consistent.
+All functions were written as pure functions, meaning they produce predictable results without side effects.
+
+## Challenges with Conditional Logic
+
+The main challenge was handling invalid or unexpected inputs — for example, empty strings, negative values, or incorrect data types.
+To solve this, I added thorough input validation and returned a clear error message ("Invalid input.") when necessary.
+Another challenge was implementing different eligibility conditions and discount types.
+For the discount feature, I created flexible logic that supports both numeric and object-based discounts (e.g., { type: "percentage", value: 10 }).
+
+## Benefits of Refactoring
+
+Refactoring made the code easier to understand, extend, and test.
+By reusing validation logic and organizing calculations into clear steps (subtotal, discountedSubtotal, totalCost), the code became more readable and modular.
+Adding the optional discount parameter improved flexibility without changing the core logic of the function.
+This approach makes future updates or feature additions simpler and less error-prone.
