@@ -50,3 +50,43 @@ function checkFullNameWithValidation(firstName, lastName) {
 // Example usage for Task 1.3:
 console.log(checkFullNameWithValidation("John", "")); // Returns "Invalid name input."
 console.log(checkFullNameWithValidation("", "Doe")); // Returns "Invalid name input."
+
+/****************************************************************************************    */
+// TASK 2: Mathematical Operations with Multiple Parameters
+
+/**
+ * Calculates the total cost including tax using the formula: totalCost = (price * quantity) * (1 + taxRate)
+ */
+function calculateTotalCost(price, quantity, taxRate) {
+  // check if all parameters are valid numbers
+  if (
+    typeof price !== "number" ||
+    typeof quantity !== "number" ||
+    typeof taxRate !== "number" ||
+    isNaN(price) ||
+    isNaN(quantity) ||
+    isNaN(taxRate) ||
+    price < 0 ||
+    quantity < 0 ||
+    taxRate < 0
+  ) {
+    return "Invalid input.";
+  }
+
+  // Calculate total cost using the specified formula: totalCost = (price * quantity) * (1 + taxRate)
+  const totalCost = price * quantity * (1 + taxRate);
+
+  return totalCost;
+}
+
+// Example usage for Task 2:
+console.log("Task 2 - Calculate Total Cost:");
+console.log(calculateTotalCost(10, 3, 0.08)); // Output: 32.4 (price: $10, quantity: 3, tax: 8%)
+console.log(calculateTotalCost(25.5, 2, 0.075)); // Output: 54.825 (price: $25.50, quantity: 2, tax: 7.5%)
+console.log(calculateTotalCost(15, 1, 0.1)); // Output: 16.5 (price: $15, quantity: 1, tax: 10%)
+
+// Test invalid inputs:
+console.log(calculateTotalCost("10", 3, 0.08)); // Output: "Invalid input." (price is string)
+console.log(calculateTotalCost(10, -3, 0.08)); // Output: "Invalid input." (negative quantity)
+console.log(calculateTotalCost(10, 3, "0.08")); // Output: "Invalid input." (taxRate is string)
+console.log(calculateTotalCost(NaN, 3, 0.08)); // Output: "Invalid input." (price is NaN)
